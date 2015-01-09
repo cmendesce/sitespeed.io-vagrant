@@ -1,0 +1,69 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+$rootScript = <<SCRIPT
+if [ ! -f /etc/root_provisioned_at ]
+  then
+  apt-get update
+  apt-get -y install git
+  apt-get -y install curl
+  apt-get -y install default-jre
+  apt-get -y install firefox
+
+  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+  sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+  apt-get update
+  apt-get -y install google-chrome-stable
+
+  apt-get install unzip
+
+  apt-get install -y libgl1-mesa-dri xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic xvfb x11-apps imagemagick
+
+  wget -N http://chromedriver.storage.googleapis.com/2.13/chromedriver_linux64.zip
+  unzip chromedriver_linux64.zip
+  rm chromedriver_linux64.zip
+  chmod +x chromedriver
+  mv -f chromedriver /usr/local/share/chromedriver
+  ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
+  ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
+
+  date > /etc/root_provisioned_at
+fi
+SCRIPT
+
+$userScript = <<SCRIPT
+if [ ! -d $HOME/.nvm ]
+  then
+  curl https://raw.githubusercontent.com/creationix/nvm/v0.22.0/install.sh | sh
+  source $HOME/.nvm/nvm.sh
+  nvm install stable
+  npm install -g sitespeed.io
+  npm install -g browsertime
+
+  echo "\n\nnvm use stable" >> ~/.bashrc
+
+  echo "\n\n/usr/bin/Xvfb :99 -ac -screen 0 1024x768x8 &" >> ~/.bashrc
+fi
+SCRIPT
+
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "ubuntu/trusty64"
+  config.vm.provider "virtualbox" do |vb|
+    # vb.gui = true
+  
+    vb.customize ["modifyvm", :id, "--memory", "1024"]
+  end
+
+  config.vm.provision "shell", inline: $rootScript
+  config.vm.provision "shell", inline: $userScript, privileged: false
+
+  if Vagrant.has_plugin?("vagrant-cachier")
+    # Configure cached packages to be shared between instances of the same base box.
+    # More info on http://fgrehm.viewdocs.io/vagrant-cachier/usage
+    config.cache.scope = :box
+  end
+end
