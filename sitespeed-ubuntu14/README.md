@@ -1,4 +1,4 @@
-# Install sitespeed.io on Ubuntu 14 64 b
+# Install sitespeed.io on Ubuntu 14 [64-bit]
 
 Will install the following:
 * sitespeed.io
