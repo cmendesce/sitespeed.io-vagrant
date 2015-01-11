@@ -12,7 +12,7 @@ Run ```vagrant up``` and it will install the following:
 xvfb-run --server-args="-screen 0 1024x768x24" sitespeed.io -u http://www.sitespeed.io -b chrome
 ```
 
-## Run and fetch timings Firefox
+## Run and fetch timings using Firefox
 ```bash
 xvfb-run --server-args="-screen 0 1024x768x24" sitespeed.io -u http://www.sitespeed.io -b firefox
 ```
