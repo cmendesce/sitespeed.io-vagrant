@@ -18,7 +18,7 @@ if [ ! -f /etc/root_provisioned_at ]
   # Extras for xvfb
   apt-get install -y libgl1-mesa-dri xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic
 
-  # Now fetch the chrome driver, TODO cleanup
+  # Now fetch the chrome driver
   wget -N http://chromedriver.storage.googleapis.com/2.13/chromedriver_linux64.zip
   unzip chromedriver_linux64.zip
   rm chromedriver_linux64.zip
