@@ -8,7 +8,7 @@ Will install the following:
 * node
 
 ## Run using Chrome
-xvfb-run --server-args="-screen 0 1024x768x24" -u http://www.sitespeed.io -b chrome
+xvfb-run --server-args="-screen 0 1024x768x24" sitespeed.io -u http://www.sitespeed.io -b chrome
 
 ## Run using Firefox
-xvfb-run --server-args="-screen 0 1024x768x24" -u http://www.sitespeed.io -b firefox
+xvfb-run --server-args="-screen 0 1024x768x24" sitespeed.io -u http://www.sitespeed.io -b firefox
