@@ -16,16 +16,14 @@ if [ ! -f /etc/root_provisioned_at ]
   apt-get -y install git curl default-jre-headless firefox google-chrome-stable unzip xvfb
 
   # Extras for xvfb
-  apt-get install -y libgl1-mesa-dri xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic x11-apps
+  apt-get install -y libgl1-mesa-dri xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic
 
   # Now fetch the chrome driver, TODO cleanup
   wget -N http://chromedriver.storage.googleapis.com/2.13/chromedriver_linux64.zip
   unzip chromedriver_linux64.zip
   rm chromedriver_linux64.zip
   chmod +x chromedriver
-  mv -f chromedriver /usr/local/share/chromedriver
-  ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
-  ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
+  mv -f chromedriver  /usr/bin/chromedriver
 
   date > /etc/root_provisioned_at
 fi
