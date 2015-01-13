@@ -13,5 +13,11 @@ if [ ! -d $HOME/.nvm ]
 
   # lets hope node gets installed ok
   echo "nvm use stable" >> ~/.bashrc
-  # echo "/usr/bin/Xvfb :99 -ac -screen 0 1024x768x8 &" >> ~/.bashrc
+  echo "sitespeed.io --version" >> ~/.bashrc
+  echo "chromedriver --version" >> ~/.bashrc
+  echo "google-chrome-stable --version" >> ~/.bashrc
+  # Starting Firefox will get us this message
+  # GLib-CRITICAL **: g_slice_set_config: assertion 'sys_page_size == 0' failed
+  # https://bugzilla.mozilla.org/show_bug.cgi?id=833117
+  # echo "firefox -version"
 fi
