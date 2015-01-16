@@ -33,7 +33,10 @@ if [ ! -f /etc/root_provisioned_at ]
   rm chromedriver_linux64.zip
   chmod +x chromedriver
   mv -f chromedriver  /usr/bin/chromedriver
-  
+
+  # Set locale
+  echo "export LC_ALL='en_US.utf8'" >> ~/.bashrc
+
   # echo some info on login
   echo "sitespeed.io --version" >> ~/.bashrc
   echo "chromedriver --version" >> ~/.bashrc
