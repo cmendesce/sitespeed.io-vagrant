@@ -28,7 +28,7 @@ if [ ! -f /etc/root_provisioned_at ]
   npm install -g sitespeed.io
 
   # Now fetch the chrome driver
-  wget -N http://chromedriver.storage.googleapis.com/2.13/chromedriver_linux64.zip
+  wget -N http://chromedriver.storage.googleapis.com/2.14/chromedriver_linux64.zip
   unzip chromedriver_linux64.zip
   rm chromedriver_linux64.zip
   chmod +x chromedriver
