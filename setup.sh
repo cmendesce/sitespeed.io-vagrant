@@ -19,7 +19,7 @@ if [ ! -f /etc/root_provisioned_at ]
   apt-get install -y libgl1-mesa-dri xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic
 
   # Get node and npm
-  apt-get install -y nodejs npm 
+  apt-get install -y nodejs npm
 
   # Setup node (is there a better way to do this?)
   ln -s /usr/bin/nodejs /usr/local/bin/node
@@ -49,7 +49,17 @@ if [ ! -f /etc/root_provisioned_at ]
   # and then turn off chrome auto update
   mv /etc/apt/sources.list.d/google-chrome.list /etc/apt/sources.list.d/google-chrome.list.save
 
+  # Add Jenkins key to apt
+  wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -
+  sh -c 'echo deb http://pkg.jenkins-ci.org/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+
+  # Update
+  apt-get update
+
+  # Installing jenkins
+  apt-get install jenkins
+
   echo 'Installation finished'
-  
+
   date > /etc/root_provisioned_at
 fi
